@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-
 import {
   StyleSheet,
   Text,
   View,
   ImageBackground,
-  Dimensions,
   TextInput,
   TouchableOpacity,
   Pressable,
@@ -23,7 +21,6 @@ export default RegistrationScreen = () => {
   const [login, setLogin] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [focusedInput, setFocusedInput] = useState(null);
-
   const [isShownKeyboard, setIsShownKeyboard] = useState(false);
 
   const keyboardHide = () => {
