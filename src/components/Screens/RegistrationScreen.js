@@ -29,6 +29,21 @@ export default RegistrationScreen = () => {
   };
 
   const handleSubmit = () => {
+    if (!login || !email || !password) {
+      console.log("Щось пішло не так.. Заповніть всі поля.");
+      return;
+    }
+
+    const isValidEmail = (email) => {
+      const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      return emailPattern.test(email);
+    };
+
+    if (!isValidEmail(email)) {
+      console.log("Невірний формат електронної пошти");
+      return false;
+    }
+
     const userData = {
       login: login,
       email: email,
