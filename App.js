@@ -1,10 +1,10 @@
 import { useFonts } from "expo-font";
-
-import RegistrationScreen from "./src/components/Screens/RegistrationScreen";
-import LoginScreen from "./src/components/Screens/LoginScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import "react-native-gesture-handler";
 
 import { StyleSheet } from "react-native";
-import PostsScreen from "./src/components/Screens/PostsScreen";
+
+import { useRoute } from "./router";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -17,13 +17,13 @@ export default function App() {
     return null;
   }
 
+  const routing = useRoute({});
+  // const routing = useRoute(null);
+
   return (
     <>
-      {/* <RegistrationScreen /> */}
-      <LoginScreen />
-      {/* <PostsScreen /> */}
+      <NavigationContainer>{routing}</NavigationContainer>
     </>
   );
 }
-
 const styles = StyleSheet.create({});

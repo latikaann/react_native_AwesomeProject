@@ -2,15 +2,9 @@ import Icon from "react-native-vector-icons/Feather";
 import React from "react";
 import { Text, StyleSheet, View, Image } from "react-native";
 
-export default function PostsScreen() {
+export default PostsScreen = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.title}>Публікації</Text>
-        <Icon style={styles.exitIcon} name="log-out" size={25} />
-        <View style={styles.horizontalLine} />
-      </View>
-
       <View style={styles.userContainer}>
         <Image
           style={styles.userAvatar}
@@ -21,22 +15,9 @@ export default function PostsScreen() {
           <Text style={styles.userText}>email@example.com</Text>
         </View>
       </View>
-
-      <View style={styles.footerContainer}>
-        <View style={styles.horizontalFooterLine} />
-        <View style={styles.footerIcons}>
-          <Icon name="grid" size={24} color="rgba(33, 33, 33, 0.8)" />
-        </View>
-        <View style={[styles.footerIcons, styles.footerAddIcon]}>
-          <Icon name="plus" size={13} color="white" />
-        </View>
-        <View style={styles.footerIcons}>
-          <Icon name="user" size={24} color="rgba(33, 33, 33, 0.8)" />
-        </View>
-      </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -45,34 +26,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     flexDirection: "column",
   },
-  headerContainer: {
-    borderColor: "#BDBDBD",
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "flex-end",
-    height: 88,
-  },
-  horizontalLine: {
-    height: 1,
-    backgroundColor: "#BDBDBD",
-    position: "absolute",
-    left: -16,
-    right: -16,
-    top: 88,
-  },
-  title: {
-    flex: 1,
-    textAlign: "center",
-    fontFamily: "Roboto-Medium",
-    fontSize: 17,
-    lineHeight: 22,
-    letterSpacing: -0.41,
-    paddingBottom: 11,
-  },
-  exitIcon: {
-    paddingBottom: 10,
-    color: "#BDBDBD",
-  },
+
   userContainer: {
     border: 1,
     borderBlockColor: "black",
@@ -98,37 +52,5 @@ const styles = StyleSheet.create({
     fontSize: 11,
     lineHeight: 12.89,
     color: "rgba(33, 33, 33, 0.8)",
-  },
-  footerContainer: {
-    borderColor: "#BDBDBD",
-    width: "100%",
-    paddingHorizontal: 16,
-    height: 108,
-
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 31,
-    marginTop: "auto",
-  },
-  footerIcons: {
-    padding: 8,
-    height: 40,
-    width: 40,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  footerAddIcon: {
-    width: 70,
-    borderRadius: 20,
-    backgroundColor: "rgba(255, 108, 0, 1)",
-  },
-  horizontalFooterLine: {
-    height: 1,
-    backgroundColor: "#BDBDBD",
-    position: "absolute",
-    left: -16,
-    right: -16,
-    bottom: 83,
   },
 });

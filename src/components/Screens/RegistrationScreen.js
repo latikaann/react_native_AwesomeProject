@@ -15,7 +15,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 
-export default RegistrationScreen = () => {
+export default RegistrationScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState("");
@@ -39,10 +39,10 @@ export default RegistrationScreen = () => {
       return emailPattern.test(email);
     };
 
-    if (!isValidEmail(email)) {
-      console.log("Невірний формат електронної пошти");
-      return false;
-    }
+    // if (!isValidEmail(email)) {
+    //   console.log("Невірний формат електронної пошти");
+    //   return false;
+    // }
 
     const userData = {
       login: login,
@@ -56,6 +56,11 @@ export default RegistrationScreen = () => {
     setLogin("");
 
     keyboardHide();
+
+    navigation.navigate("Home");
+    setTimeout(() => {
+      navigation.navigate("Posts");
+    }, 0);
   };
 
   const toggleShowPassword = () => {
@@ -162,9 +167,15 @@ export default RegistrationScreen = () => {
               <Text style={styles.buttonText}>Зареєструватися</Text>
             </TouchableOpacity>
 
-            <Pressable style={styles.textLoginBtn}>
-              <Text style={styles.textLogin}>Вже є акаунт? Увійти</Text>
-            </Pressable>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.textLoginBtn}
+              onPress={() => navigation.navigate("Login")}
+            >
+              <Text style={styles.textLogin}>
+                Вже є акаунт? <Text style={styles.underline}>Увійти</Text>
+              </Text>
+            </TouchableOpacity>
           </View>
         </ImageBackground>
         <StatusBar style="auto" />
@@ -256,6 +267,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
     lineHeight: 18.75,
+  },
+  underline: {
+    textDecorationLine: "underline",
   },
 
   showPasswordButton: {

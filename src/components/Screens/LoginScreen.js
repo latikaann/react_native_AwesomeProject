@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native";
 
 import {
   StyleSheet,
@@ -15,7 +16,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
-export default LoginScreen = () => {
+export default LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState("");
@@ -30,6 +31,21 @@ export default LoginScreen = () => {
   };
 
   const handleSubmit = () => {
+    if (!email || !password) {
+      console.log("Щось пішло не так.. Заповніть всі поля.");
+      return;
+    }
+
+    const isValidEmail = (email) => {
+      const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      return emailPattern.test(email);
+    };
+
+    if (!isValidEmail(email)) {
+      console.log("Невірний формат електронної пошти");
+      return false;
+    }
+
     const userData = {
       email: email,
       password: password,
@@ -40,6 +56,11 @@ export default LoginScreen = () => {
     setPassword("");
 
     keyboardHide();
+
+    navigation.navigate("Home");
+    setTimeout(() => {
+      navigation.navigate("Posts");
+    }, 0);
   };
 
   const toggleShowPassword = () => {
@@ -126,11 +147,16 @@ export default LoginScreen = () => {
               <Text style={styles.buttonText}>Увійти</Text>
             </TouchableOpacity>
 
-            <Pressable style={styles.textLoginBtn}>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.textLoginBtn}
+              onPress={() => navigation.navigate("Registration")}
+            >
               <Text style={styles.textLogin}>
-                Немає акаунту? Зареєструватися
+                Немає акаунту?
+                <Text style={styles.underline}>Зареєструватися</Text>
               </Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </ImageBackground>
         <StatusBar style="auto" />
@@ -203,6 +229,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
     lineHeight: 18.75,
+  },
+  underline: {
+    textDecorationLine: "underline",
   },
   showPasswordButton: {
     paddingHorizontal: 16,
