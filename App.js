@@ -4,7 +4,7 @@ import "react-native-gesture-handler";
 
 import { StyleSheet } from "react-native";
 
-import { useRoute } from "./router";
+import { useRoute } from "./src/utils/router";
 
 export default function App() {
   const [fontsLoaded] = useFonts({

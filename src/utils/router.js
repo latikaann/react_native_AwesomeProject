@@ -6,12 +6,12 @@ import { Feather } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import Home from "./src/components/Screens/Home";
-import PostsScreen from "./src/components/Screens/PostsScreen";
-import CreatePostsScreen from "./src/components/Screens/CreatePostsScreen";
-import ProfileScreen from "./src/components/Screens/ProfileScreen";
-import RegistrationScreen from "./src/components/Screens/RegistrationScreen";
-import LoginScreen from "./src/components/Screens/LoginScreen";
+import Home from "../Screens/mainScreens/Home";
+import PostsScreen from "../Screens/mainScreens/PostsScreen";
+import CreatePostsScreen from "../Screens/mainScreens/CreatePostsScreen";
+import ProfileScreen from "../Screens/mainScreens/ProfileScreen";
+import RegistrationScreen from "../Screens/auth/RegistrationScreen";
+import LoginScreen from "../Screens/auth/LoginScreen";
 
 const MainStack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -40,12 +40,6 @@ export const useRoute = (isAuth) => {
   }
   return (
     <>
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerTitle}>Публікації</Text>
-        <Feather style={styles.exitIcon} name="log-out" size={24} />
-      </View>
-      <View style={styles.horizontalLine} />
-
       <Tabs.Navigator
         screenOptions={({ route }) => ({
           headerShown: false,
@@ -53,10 +47,11 @@ export const useRoute = (isAuth) => {
           tabBarStyle: {
             height: 71,
           },
+
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
 
-            if (route.name === "Posts") {
+            if (route.name === "Home") {
               iconName = "grid";
             } else if (route.name === "CreatePosts") {
               iconName = "plus";
@@ -76,8 +71,16 @@ export const useRoute = (isAuth) => {
           },
         })}
       >
-        <Tabs.Screen name="Posts" component={PostsScreen} />
-        <Tabs.Screen name="CreatePosts" component={CreatePostsScreen} />
+        <Tabs.Screen name="Home" component={Home} />
+        <Tabs.Screen
+          name="CreatePosts"
+          component={CreatePostsScreen}
+          options={{
+            headerShown: true,
+            title: "Створити публікацію",
+            headerTitleAlign: "center",
+          }}
+        />
         <Tabs.Screen name="Profile" component={ProfileScreen} />
       </Tabs.Navigator>
     </>
